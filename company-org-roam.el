@@ -6,7 +6,7 @@
 ;; URL: https://github.com/jethrokuan/company-org-roam
 ;; Keywords: org-mode, roam, convenience
 ;; Version: 1.0.0
-;; Package-Requires: ((emacs "26.1") (company "0.9.0") (org-roam "1.0.0"))
+;; Package-Requires: ((emacs "26.1") (company "0.9.0") (dash "2.13") (org-roam "1.0.0"))
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -38,6 +38,7 @@
 (require 'cl-lib)
 (require 'company)
 (require 'org-roam)
+(require 'dash)
 
 (defvar org-roam-directory)
 
