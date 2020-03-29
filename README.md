@@ -1,6 +1,7 @@
 [![License GPL 3](https://img.shields.io/badge/license-GPL_3-green.svg)](http://www.gnu.org/licenses/gpl-3.0.txt)
 [![GitHub
 Release](https://img.shields.io/github/v/release/jethrokuan/company-org-roam)](https://img.shields.io/github/v/release/jethrokuan/company-org-roam)
+[![MELPA](https://melpa.org/packages/company-org-roam-badge.svg)](https://melpa.org/#/company-org-roam)
 
 ## Synopsis
 
