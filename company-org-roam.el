@@ -85,7 +85,7 @@ relative file link."
   "Filter CANDIDATES that start with PREFIX.
 The string match is case-insensitive."
   (-filter (lambda (candidate)
-             (s-starts-with-p prefix candidate t)) candidates))
+             (string-prefix-p prefix candidate t)) candidates))
 
 (defun company-org-roam--update-cache ()
   "Update the cache with new entries.
