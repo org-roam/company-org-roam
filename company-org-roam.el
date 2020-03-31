@@ -68,7 +68,10 @@ A value of nil means the caches never expire."
 (defun company-org-roam--post-completion (candidate)
   "The post-completion action for `company-org-roam'.
 It deletes the inserted CANDIDATE, and replaces it with a
-relative file link."
+relative file link.
+
+The completion inserts the absolute file path where the buffer
+does not have a corresponding file."
   (let* ((cache (gethash (file-truename org-roam-directory) company-org-roam-cache))
          (path (gethash candidate cache))
          (current-file-path (-> (or (buffer-base-buffer)
@@ -78,7 +81,9 @@ relative file link."
                                 (file-name-directory))))
     (delete-region (- (point) (length candidate)) (point))
     (insert (format "[[file:%s][%s]]"
-                    (file-relative-name path current-file-path)
+                    (if current-file-path
+                        (file-relative-name path current-file-path)
+                      path)
                     candidate))))
 
 (defun company-org-roam--filter-candidates (prefix candidates)
