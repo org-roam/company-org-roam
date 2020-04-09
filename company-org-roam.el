@@ -132,6 +132,7 @@ COMMAND and ARG are as per the documentation of `company-backends'."
     (prefix
      (and
       (bound-and-true-p org-roam-mode)
+      (org-roam--org-roam-file-p (buffer-file-name (buffer-base-buffer)))
       (or (company-grab-symbol) 'stop)))
     (candidates
      (company-org-roam--get-candidates arg))
