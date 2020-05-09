@@ -54,6 +54,11 @@ A value of nil means the caches never expire."
   :type '(integer :tag "Seconds")
   :group 'company-org-roam)
 
+(defcustom company-org-roam-exclude-current-file nil
+  "If t, excludes the current file from the completion candidates."
+  :type 'boolean
+  :group 'company-org-roam)
+
 (defvar company-org-roam-last-cache-time (make-hash-table :test #'equal)
   "Time of last cache.")
 
@@ -108,13 +113,20 @@ Entries with no title do not appear in the completions."
   "Return all the titles."
   (let* ((dir (file-truename org-roam-directory))
          (last-cache-time (gethash dir company-org-roam-last-cache-time))
-         (curr-time (company-org-roam-time-seconds)))
+         (curr-time (company-org-roam-time-seconds))
+         titles)
     (when (or (null last-cache-time)
               (< (+ last-cache-time company-org-roam-cache-expire)
                  curr-time))
       (puthash dir curr-time company-org-roam-last-cache-time)
       (company-org-roam--update-cache))
-    (hash-table-keys (gethash dir company-org-roam-cache))))
+    (maphash (lambda (k v)
+               (unless (and company-org-roam-exclude-current-file
+                            (buffer-file-name)
+                            (string-equal (file-truename (buffer-file-name)) v))
+                 (push k titles)))
+             (gethash dir company-org-roam-cache))
+    titles))
 
 (defun company-org-roam--get-candidates (prefix)
   "Get the candidates for PREFIX."
