@@ -67,8 +67,8 @@ A value of nil means the caches never expire."
 
 (defun company-org-roam--post-completion (title)
   "The post-completion action for `company-org-roam'.
-It deletes the inserted CANDIDATE, and replaces it with a
-relative file link.
+It deletes the inserted TITLE, and replaces it with a relative
+file link.
 
 The completion inserts the absolute file path where the buffer
 does not have a corresponding file."
@@ -97,7 +97,7 @@ The string match is case-insensitive."
 Entries with no title do not appear in the completions."
   (let ((dir (file-truename org-roam-directory))
         (ht (make-hash-table :test #'equal)))
-    (dolist (row (org-roam-sql [:select [titles file] :from titles]))
+    (dolist (row (org-roam-db-query [:select [titles file] :from titles]))
       (let ((titles (car row))
             (file (cadr row)))
         (dolist (title titles)
