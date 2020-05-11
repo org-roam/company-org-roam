@@ -41,6 +41,7 @@
 (require 'dash)
 
 (defvar org-roam-directory)
+(defvar org-roam-use-roam-links)
 
 (defgroup company-org-roam nil
   "Company completion backend for Org-roam."
@@ -73,7 +74,7 @@ A value of nil means the caches never expire."
 (defun company-org-roam--post-completion (title)
   "The post-completion action for `company-org-roam'.
 If completing an org file link, it deletes the inserted TITLE, and
-replaces it with a relative file link. The completion inserts the
+replaces it with a relative file link.  The completion inserts the
 absolute file path where the buffer does not have a corresponding file.
 
 If roam links are the default specified by `org-roam-use-roam-links', then it
