@@ -150,17 +150,6 @@ COMMAND and ARG are as per the documentation of `company-backends'."
      (company-org-roam--get-candidates arg))
     (post-completion (company-org-roam--post-completion arg))))
 
-(defun company-org-roam--init-hook ()
-  "Conditional enabling of the `company-org-roam' backend."
-  (when (org-roam--org-roam-file-p (buffer-file-name (buffer-base-buffer)))
-    (setq-local company-backends
-                (cons'company-org-roam company-backends))))
-
-;;;###autoload
-(defun company-org-roam-init ()
-  "Injects `company-org-roam' as a completion backend."
-  (add-hook 'org-mode-hook #'company-org-roam--init-hook))
-
 (provide 'company-org-roam)
 
 ;;; company-org-roam.el ends here
