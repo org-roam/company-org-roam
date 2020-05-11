@@ -145,8 +145,8 @@ Entries with no title do not appear in the completions."
 If completing roam-link, add existing roam-link TITLEs from current
 buffer as possible candidates."
   (let ((roam-candidates
-         (if (or (string= "roam" (org-element-property :type (org-element-context)))
-                 org-roam-use-roam-links)
+         (if (or org-roam-use-roam-links
+         (string= "roam" (org-element-property :type (org-element-context))))
              (org-roam--current-buffer-roam-link-titles)
            nil)))
     (->> (company-org-roam--cache-get-titles)
