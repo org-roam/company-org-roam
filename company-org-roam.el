@@ -146,7 +146,7 @@ If completing roam-link, add existing roam-link TITLEs from current
 buffer as possible candidates."
   (let ((roam-candidates
          (if (or org-roam-use-roam-links
-         (string= "roam" (org-element-property :type (org-element-context))))
+                 (string= "roam" (org-element-property :type (org-element-context))))
              (org-roam--current-buffer-roam-link-titles)
            nil)))
     (->> (company-org-roam--cache-get-titles)
