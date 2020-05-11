@@ -42,6 +42,7 @@
 
 (defvar org-roam-directory)
 (defvar org-roam-use-roam-links)
+(declare-function org-roam--current-buffer-roam-link-titles "org-roam" ())
 
 (defgroup company-org-roam nil
   "Company completion backend for Org-roam."
