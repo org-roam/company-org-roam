@@ -16,7 +16,7 @@ You can install it using `use-package` and `straight.el`:
 
 ```emacs-lisp
 (use-package company-org-roam
-  :straight (:host github :repo "jethrokuan/company-org-roam")
+  :straight (:host github :repo "org-roam/company-org-roam")
   :config
   (push 'company-org-roam company-backends))
 ```
