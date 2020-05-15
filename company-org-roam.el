@@ -85,7 +85,6 @@ then it will delete the inserted TITLE and replace it with a complete roam link.
 If completing with the point inside of roam link syntax, [[roam:]], it
 will simply finish the TITLE and move the point forward out of the link
 regardless of the value of `org-roam-link-use-roam-links'."
-  (message "Hello!!")
   (cond ((string= "roam" (org-element-property :type (org-element-context)))
          (goto-char (org-element-property :end (org-element-context))))
         (org-roam-link-use-roam-links
