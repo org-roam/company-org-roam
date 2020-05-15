@@ -38,11 +38,12 @@
 (require 'cl-lib)
 (require 'company)
 (require 'org-roam)
+(require 'org-roam-link)
 (require 'dash)
 
 (defvar org-roam-directory)
-(defvar org-roam-use-roam-links)
-(declare-function org-roam--current-buffer-roam-link-titles "org-roam" ())
+(defvar org-roam-link-use-roam-links)
+(declare-function org-roam-link--current-buffer-roam-link-titles "org-roam-link" ())
 
 (defgroup company-org-roam nil
   "Company completion backend for Org-roam."
@@ -78,18 +79,20 @@ If completing an org file link, it deletes the inserted TITLE, and
 replaces it with a relative file link.  The completion inserts the
 absolute file path where the buffer does not have a corresponding file.
 
-If roam links are the default specified by `org-roam-use-roam-links', then it
-will delete the inserted TITLE and replace it with a complete roam link.
+If roam links are the default specified by `org-roam-link-use-roam-links',
+then it will delete the inserted TITLE and replace it with a complete roam link.
 
 If completing with the point inside of roam link syntax, [[roam:]], it
 will simply finish the TITLE and move the point forward out of the link
-regardless of the value of `org-roam-use-roam-links'."
+regardless of the value of `org-roam-link-use-roam-links'."
+  (message "Hello!!")
   (cond ((string= "roam" (org-element-property :type (org-element-context)))
          (goto-char (org-element-property :end (org-element-context))))
-        (org-roam-use-roam-links
+        (org-roam-link-use-roam-links
          (delete-region (- (point) (length title)) (point))
          (insert (format "[[roam:%s]]" title)))
-        (t (let* ((cache (gethash (file-truename org-roam-directory) company-org-roam-cache))
+        (t (let* ((cache (gethash (file-truename org-roam-directory)
+                                  company-org-roam-cache))
                   (path (gethash title cache))
                   (current-file-path (-> (or (buffer-base-buffer)
                                              (current-buffer))
@@ -146,8 +149,8 @@ If completing roam-link, add existing roam-link TITLEs from current
 buffer as possible candidates."
   (let ((roam-candidates
          (if (or (string= "roam" (org-element-property :type (org-element-context)))
-                 org-roam-use-roam-links)
-             (org-roam--current-buffer-roam-link-titles)
+                 org-roam-link-use-roam-links)
+             (org-roam-link--current-buffer-roam-link-titles)
            nil)))
     (->> (company-org-roam--cache-get-titles)
          (-flatten)
