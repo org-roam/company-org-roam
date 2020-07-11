@@ -102,11 +102,10 @@ The string match is case-insensitive."
 Entries with no title do not appear in the completions."
   (let ((dir (file-truename org-roam-directory))
         (ht (make-hash-table :test #'equal)))
-    (dolist (row (org-roam-db-query [:select [titles file] :from titles]))
-      (let ((titles (car row))
+    (dolist (row (org-roam-db-query [:select [title file] :from titles]))
+      (let ((title (car row))
             (file (cadr row)))
-        (dolist (title titles)
-          (puthash title file ht))))
+        (puthash title file ht)))
     (puthash dir ht company-org-roam-cache)))
 
 (defun company-org-roam--cache-get-titles ()
