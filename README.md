@@ -12,7 +12,18 @@ Org-roam buffers, it provides completion for Org-roam files using its title.
 
 ## Installation
 
-You can install it using `use-package` and `straight.el`:
+You can install it using `use-package`:
+
+```emacs-lisp
+(use-package company-org-roam
+  :ensure t
+  ;; You may want to pin in case the version from stable.melpa.org is not working 
+  ; :pin melpa
+  :config
+  (push 'company-org-roam company-backends))
+```
+
+Or in case you're using `use-package` with `straight.el`:
 
 ```emacs-lisp
 (use-package company-org-roam
