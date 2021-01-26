@@ -1,3 +1,9 @@
+# This package is now deprecated
+
+`company-org-roam` has been replaced by `capf`, and its full functionality is now present within `org-roam` itself. Do not install this!
+
+---
+
 [![License GPL 3](https://img.shields.io/badge/license-GPL_3-green.svg)](http://www.gnu.org/licenses/gpl-3.0.txt)
 [![GitHub
 Release](https://img.shields.io/github/v/release/jethrokuan/company-org-roam)](https://img.shields.io/github/v/release/jethrokuan/company-org-roam)
@@ -17,7 +23,7 @@ You can install it using `use-package`:
 ```emacs-lisp
 (use-package company-org-roam
   :ensure t
-  ;; You may want to pin in case the version from stable.melpa.org is not working 
+  ;; You may want to pin in case the version from stable.melpa.org is not working
   ; :pin melpa
   :config
   (push 'company-org-roam company-backends))
